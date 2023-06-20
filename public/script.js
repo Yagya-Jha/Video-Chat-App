@@ -57,7 +57,7 @@ socket.on("create_message", (message, userName)=>{
 
 function addVideoStream(video,stream){
     video.srcObject = stream;
-    video.addEventListener("loadmetadata",()=>{
+    video.addEventListener("loadedmetadata",()=>{
         video.play();
         $("#videoDiv").append(video);
     });
