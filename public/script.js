@@ -8,6 +8,14 @@ var peer = new Peer(undefined, {
 
 const user = prompt("Enter your name");
 
+const myVideo = document.createElement("video");
+myVideo.muted=true;
+let myStream;
+navigator.mediaDevices.getUserMedia({audio: true, video:true}).then((stream)=>{
+    myStream = stream;
+    addVideoStream(myVideo,stream);
+});
+
 $(function(){
     $("#show_chat").click(function(){
         $(".left-window").css("display", "none")
@@ -46,3 +54,11 @@ socket.on("create_message", (message, userName)=>{
                             <b><i class="far fa-user-circle"></i><span>${userName===user?"Me":userName}</span></b>
                             <span>${message}</span></div>`);
 });
+
+function addVideoStream(video,stream){
+    video.srcObject = stream;
+    video.addEventListener("loadmetadata",()=>{
+        video.play();
+        $("#videoDiv").append(video);
+    });
+}
