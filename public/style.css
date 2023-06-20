@@ -6,7 +6,7 @@
   --primary-color: #2f80ec;
   --main-light: #eeeeee;
   font-family: "Poppins", sans-serif;
-  overflow: hidden;
+  overflow:hidden;
 }
 
 #show_chat #mute_button #stop_video #options_button{
@@ -50,6 +50,7 @@
 .messages {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .main_message_container {
@@ -84,7 +85,6 @@
 .message{
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
 }
 
 .message > span{
