@@ -24,7 +24,7 @@ app.get("/:root", (req,res)=>{
 io.on("connection",(socket) => {
     socket.on('join-room', (roomId, userId, userName)=>{
         socket.join(roomId);
-
+        io.to(roomId).emit("user-connected", userId);
         socket.on('message',(message) =>{
             io.to(roomId).emit("create_message", message, userName)
         });
