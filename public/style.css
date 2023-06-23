@@ -142,4 +142,8 @@ video{
     .left_window {
         display: flex;
     }
+      video{
+      width: 50vw;
+      height: 50vh;
+    }
 }
