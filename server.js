@@ -38,7 +38,7 @@ app.post("/send-mail", (req, res)=>{
     }
     transpoter.sendMail(mailData, (error, info)=>{
         if(error){
-            return console.error(error);
+            return console.log(error);
         }else{
             res.status(200).send({message: "Invitation Sent !!", message_id: info.messageId});
         }
