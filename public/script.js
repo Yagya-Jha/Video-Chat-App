@@ -99,7 +99,7 @@ $(function(){
                 alert("Invite Sent to "+to);
             },
             error: function(result){
-                console.error(result.responseJSON);
+                console.log(result.responseJSON);
             }
         });
     });
