@@ -1,3 +1,4 @@
+var nodemailer = require('nodemailer')
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
@@ -6,6 +7,11 @@ app.use(express.static('public'))
 const {v4: uuidv4} = require("uuid")
 
 const io = require("socket.io")(server, {cors: {origin: '*'}});
+const transpoter = nodemailer.createTransport({ port: 587, 
+                                                host: "smtp.gmail.com", 
+                                                auth:{user: "yagyajha02jan@gmail.com",
+                                                      pass:"johrlsxphfiwctnw"},
+                                                secure: true});
 
 const { ExpressPeerServer } = require("peer");
 const peerServer = ExpressPeerServer(server, {
@@ -19,6 +25,24 @@ app.get("/", (req, res) => {
 });
 app.get("/:root", (req,res)=>{
     res.render("index",{roomId: req.params.room})
+});
+
+app.post("/send-mail", (req, res)=>{
+    const to=req.body.to;
+    const url=req.body.url;
+    const mailData={
+        from: "yagyajha02jan@gmail.com",
+        to: to,
+        subject: 'Join Meeting',
+        html: `<p>Hey there ! <br> Come and join me for Video Chat.<br>${url}<br>Just Click on the link to join.</p>`
+    }
+    transpoter.sendMail(mailData, (error, info)=>{
+        if(error){
+            return console.error(error);
+        }else{
+            res.status(200).send({message: "Invitation Sent !!", message_id: info.messageId});
+        }
+    });
 });
 
 io.on("connection",(socket) => {
