@@ -7,7 +7,7 @@ app.use(express.static('public'))
 const {v4: uuidv4} = require("uuid")
 
 const io = require("socket.io")(server, {cors: {origin: '*'}});
-const transpoter = nodemailer.createTransport({ port: 587, 
+const transpoter = nodemailer.createTransport({ port: 465, 
                                                 host: "smtp.gmail.com", 
                                                 auth:{user: "yagyajha02jan@gmail.com",
                                                       pass:"johrlsxphfiwctnw"},
